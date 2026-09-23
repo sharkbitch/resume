@@ -512,6 +512,8 @@
     .awards { grid-template-columns: 1fr; }
     .skills-grid { grid-template-columns: 1fr; }
     .reading-grid { grid-template-columns: 1fr; }
+    .interest-grid { grid-template-columns: 1fr; }
+    .gallery { column-count: 2; }
     .matrix-watermark { right: -40px; opacity: .06; }
   }
   @media (max-width: 520px) {
@@ -519,6 +521,7 @@
     .card { padding: 22px 18px; }
     .project { padding: 28px 22px; }
     .wrap { padding: 0 20px; }
+    .gallery { column-count: 1; }
   }
 
   /* ---------- Resume PDF export sheet ---------- */
@@ -579,6 +582,49 @@
   #resume-sheet .rs-awards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 7px 24px; }
   #resume-sheet .rs-award { display: flex; flex-direction: column; font-size: 12px; color: #333; }
   #resume-sheet .rs-yr { font-size: 11px; font-weight: 700; color: #0071e3; }
+
+  /* ---------- Interests ---------- */
+  .interest-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .interest-card {
+    background: var(--bg-light); border-radius: var(--radius); padding: 28px 26px;
+    transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+  }
+  .interest-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,.07); }
+  .interest-card h3 { font-size: 19px; font-weight: 650; letter-spacing: -.01em; }
+  .interest-card .sub { font-size: 14px; color: var(--text-2); margin-top: 6px; }
+
+  .gallery-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+  .gallery-head h3 { font-size: 15px; font-weight: 600; }
+  .gallery-head .gallery-sub { font-size: 14px; color: var(--text-2); }
+
+  .gallery { column-count: 3; column-gap: 14px; }
+  .gallery figure {
+    break-inside: avoid; margin: 0 0 14px;
+    overflow: hidden; border-radius: var(--radius-sm); cursor: zoom-in;
+  }
+  .gallery img { width: 100%; height: auto; display: block; transition: transform .5s var(--ease); }
+  .gallery figure:hover img { transform: scale(1.04); }
+
+  .lightbox {
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(0,0,0,.84);
+    display: flex; align-items: center; justify-content: center;
+    padding: 40px; cursor: zoom-out;
+    opacity: 0; pointer-events: none;
+    transition: opacity .3s var(--ease);
+  }
+  .lightbox.open { opacity: 1; pointer-events: auto; }
+  .lightbox img {
+    max-width: 100%; max-height: 100%;
+    border-radius: var(--radius); box-shadow: 0 30px 80px rgba(0,0,0,.5);
+  }
+  .lightbox .lb-close {
+    position: absolute; top: 22px; right: 28px;
+    background: none; border: none; cursor: pointer;
+    color: #fff; font-size: 34px; line-height: 1;
+    opacity: .8; transition: opacity .2s var(--ease);
+  }
+  .lightbox .lb-close:hover { opacity: 1; }
 </style>
 </head>
 <body>
@@ -594,6 +640,7 @@
         <li><a href="#experience" data-i18n="nav.experience">Experience</a></li>
         <li><a href="#awards" data-i18n="nav.awards">Awards</a></li>
         <li><a href="#reading" data-i18n="nav.reading">Reading</a></li>
+        <li><a href="#interests" data-i18n="nav.interests">Interests</a></li>
         <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
       </ul>
       <div class="lang-switch" id="langSwitch" role="group" aria-label="Language">
@@ -968,6 +1015,51 @@
   </div>
 </section>
 
+<!-- ================= INTERESTS ================= -->
+<section class="section" id="interests">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow" data-i18n="interests.eyebrow">Interests</div>
+      <h2 class="h2" data-i18n="interests.h2">Beyond the numbers.</h2>
+      <p class="lead" data-i18n="interests.lead">Theater, music and travel — how I recharge when I'm not studying.</p>
+    </div>
+
+    <div class="interest-grid" style="margin-top: 40px;">
+      <div class="interest-card reveal">
+        <h3 data-i18n="interests.c1.h3">Theater</h3>
+        <div class="sub" data-i18n="interests.c1.sub">Musicals, plays and dance performances — 话剧 · 音乐剧 · 舞剧</div>
+      </div>
+      <div class="interest-card reveal d1">
+        <h3 data-i18n="interests.c2.h3">Travel</h3>
+        <div class="sub" data-i18n="interests.c2.sub">Collecting places, not things.</div>
+      </div>
+      <div class="interest-card reveal d2">
+        <h3 data-i18n="interests.c3.h3">Reading &amp; Fitness</h3>
+        <div class="sub" data-i18n="interests.c3.sub">Steady habits that keep me sharp and balanced.</div>
+      </div>
+    </div>
+
+    <div style="margin-top: 56px;">
+      <div class="gallery-head reveal">
+        <h3 data-i18n="interests.gallery.h3">Travel snapshots</h3>
+        <span class="gallery-sub" data-i18n="interests.gallery.sub">A few frames from the road.</span>
+      </div>
+      <div class="gallery" id="gallery" style="margin-top: 20px;">
+        <figure class="reveal"><img src="photos/travel-01.jpg" alt="Travel photo 1" loading="lazy" /></figure>
+        <figure class="reveal d1"><img src="photos/travel-02.jpg" alt="Travel photo 2" loading="lazy" /></figure>
+        <figure class="reveal d2"><img src="photos/travel-03.jpg" alt="Travel photo 3" loading="lazy" /></figure>
+        <figure class="reveal"><img src="photos/travel-04.jpg" alt="Travel photo 4" loading="lazy" /></figure>
+        <figure class="reveal d1"><img src="photos/travel-05.jpg" alt="Travel photo 5" loading="lazy" /></figure>
+        <figure class="reveal d2"><img src="photos/travel-06.jpg" alt="Travel photo 6" loading="lazy" /></figure>
+        <figure class="reveal"><img src="photos/travel-07.jpg" alt="Travel photo 7" loading="lazy" /></figure>
+        <figure class="reveal d1"><img src="photos/travel-08.jpg" alt="Travel photo 8" loading="lazy" /></figure>
+        <figure class="reveal d2"><img src="photos/travel-09.jpg" alt="Travel photo 9" loading="lazy" /></figure>
+        <figure class="reveal"><img src="photos/travel-10.jpg" alt="Travel photo 10" loading="lazy" /></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ================= CONTACT ================= -->
 <section class="section dark contact" id="contact">
   <div class="wrap">
@@ -1000,7 +1092,7 @@
   const I18N = {
     en: {
       'nav.about': 'About', 'nav.education': 'Education', 'nav.work': 'Projects',
-      'nav.experience': 'Experience', 'nav.awards': 'Awards', 'nav.reading': 'Reading', 'nav.contact': 'Contact',
+      'nav.experience': 'Experience', 'nav.awards': 'Awards', 'nav.reading': 'Reading', 'nav.interests': 'Interests', 'nav.contact': 'Contact',
 
       'hero.flourish': '王 宇 恒',
       'hero.name': 'Wang <span class="grad">Yuheng</span>',
@@ -1090,6 +1182,18 @@
       'reading.b16': '1587, A Year of No Significance', 'reading.b17': '朝贡圈', 'reading.b18': 'Soulstealers', 'reading.b19': '想点大事',
       'reading.b20': '干法', 'reading.b21': 'The Richest Man in Babylon',
 
+      'interests.eyebrow': 'Interests',
+      'interests.h2': 'Beyond the numbers.',
+      'interests.lead': 'Theater, music and travel — how I recharge when I’m not studying.',
+      'interests.c1.h3': 'Theater',
+      'interests.c1.sub': 'Musicals, plays and dance performances — 话剧 · 音乐剧 · 舞剧',
+      'interests.c2.h3': 'Travel',
+      'interests.c2.sub': 'Collecting places, not things.',
+      'interests.c3.h3': 'Reading & Fitness',
+      'interests.c3.sub': 'Steady habits that keep me sharp and balanced.',
+      'interests.gallery.h3': 'Travel snapshots',
+      'interests.gallery.sub': 'A few frames from the road.',
+
       'contact.eyebrow': 'Contact', 'contact.h2': 'Let’s talk.',
       'contact.lead': 'Open to graduate opportunities, research collaborations, and anything data-related.',
       'contact.email': 'Email', 'contact.phone': 'Phone', 'contact.wechat': 'WeChat',
@@ -1102,7 +1206,7 @@
 
     zh: {
       'nav.about': '关于', 'nav.education': '教育', 'nav.work': '项目',
-      'nav.experience': '经历', 'nav.awards': '荣誉', 'nav.reading': '阅读', 'nav.contact': '联系',
+      'nav.experience': '经历', 'nav.awards': '荣誉', 'nav.reading': '阅读', 'nav.interests': '兴趣', 'nav.contact': '联系',
 
       'hero.flourish': 'WANG YUHENG',
       'hero.name': '王<span class="grad">宇恒</span>',
@@ -1191,6 +1295,18 @@
       'reading.b13': '小岛经济学', 'reading.b14': '贫穷的本质', 'reading.b15': '香帅金融学讲义',
       'reading.b16': '万历十五年', 'reading.b17': '朝贡圈', 'reading.b18': '叫魂：1768年中国妖术大恐慌', 'reading.b19': '想点大事',
       'reading.b20': '干法', 'reading.b21': '巴比伦最富有的人',
+
+      'interests.eyebrow': '个人兴趣',
+      'interests.h2': '数字之外。',
+      'interests.lead': '话剧、音乐与旅行——学习之余的放松方式。',
+      'interests.c1.h3': '戏剧',
+      'interests.c1.sub': '话剧 · 音乐剧 · 舞剧，常看常新',
+      'interests.c2.h3': '旅行',
+      'interests.c2.sub': '收集风景，而非物件。',
+      'interests.c3.h3': '阅读与健身',
+      'interests.c3.sub': '让我保持清醒与平衡的稳定习惯。',
+      'interests.gallery.h3': '旅行掠影',
+      'interests.gallery.sub': '旅途中的几个瞬间。',
 
       'contact.eyebrow': '联系', 'contact.h2': '期待交流。',
       'contact.lead': '欢迎交流深造、科研合作或任何与数据相关的话题。',
@@ -1403,6 +1519,26 @@
     let rt; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(resize, 150); });
 
     new IntersectionObserver((es) => es.forEach((en) => en.isIntersecting ? start() : stop()), { threshold: 0.05 }).observe(hero);
+  })();
+
+  // --- Gallery lightbox ---
+  (function () {
+    const gallery = document.getElementById('gallery');
+    if (!gallery) return;
+    const lb = document.createElement('div');
+    lb.className = 'lightbox';
+    lb.innerHTML = '<img alt="" /><button class="lb-close" aria-label="Close">&times;</button>';
+    document.body.appendChild(lb);
+    const lbImg = lb.querySelector('img');
+    const close = lb.querySelector('.lb-close');
+    const open = (src) => { lbImg.src = src; lb.classList.add('open'); document.body.style.overflow = 'hidden'; };
+    const closeLb = () => { lb.classList.remove('open'); document.body.style.overflow = ''; };
+    gallery.addEventListener('click', (e) => {
+      const img = e.target.closest('img');
+      if (img) open(img.src);
+    });
+    lb.addEventListener('click', (e) => { if (e.target !== lbImg) closeLb(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLb(); });
   })();
 
   // --- Resume PDF export ---
