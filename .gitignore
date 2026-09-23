@@ -1,0 +1,26 @@
+# Personal / sensitive — never commit
+*.docx
+*.doc
+*.pdf
+_*.txt
+_*.json
+_resume_dump.txt
+mitacs_*
+*.pptx
+build_ppt.py
+scrape_*.py
+
+# Prototype / scratch HTML (not part of the resume site)
+红色火箭*.html
+拼豆小游戏.html
+freshtag/
+freshtag_backup_*/
+index_backup_v1_*.html
+
+# Media not used by index.html
+portrait_backup_v1.jpg
+*.png
+
+# Env
+.env
+.githnore
